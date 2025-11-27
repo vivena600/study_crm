@@ -19,6 +19,7 @@
         <module>teachers-service</module>
         <module>schedule-service</module>
         <module>course-service</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

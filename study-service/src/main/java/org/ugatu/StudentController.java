@@ -11,6 +11,7 @@ import org.ugatu.dto.FullStudentDto;
 import org.ugatu.dto.ShortStudentDto;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/study")
@@ -18,32 +19,43 @@ import java.util.List;
 @Slf4j
 @Validated
 public class StudentController {
+    private final StudentService studentService;
 
-    /** Создание студента **/
+    /**
+     * Создание студента
+     **/
     @PostMapping
     public ResponseEntity<FullStudentDto> createdStudy(@RequestBody @Validated CreateStudentDto dto) {
         log.info("POST /study with body {}", dto.toString());
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        FullStudentDto result = studentService.createdStudent(dto);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
-    /** Получение всех пользователей **/
+    /**
+     * Получение всех пользователей
+     **/
     @GetMapping
     public ResponseEntity<List<ShortStudentDto>> getAllStudy() {
         log.info("GET /study");
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    /** Получение информации пользователя по его id **/
+    /**
+     * Получение информации пользователя по его id
+     **/
     @GetMapping("/{id}")
-    public ResponseEntity<List<FullStudentDto>> getStudyById() {
-        log.info("GET /study/id");
+    public ResponseEntity<List<FullStudentDto>> getStudyById(@PathVariable UUID id) {
+        log.info("GET /study/{}", id);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    /** Получение информации пользователя по его id **/
+    /**
+     * Получение информации пользователя по его id
+     **/
     @PutMapping("/{id}")
-    public ResponseEntity<List<FullStudentDto>> updateStudent() {
-        log.info("GET /study/id");
+    public ResponseEntity<FullStudentDto> updateStudent(@PathVariable UUID id,
+                                                        @RequestBody @Validated CreateStudentDto dto) {
+        log.info("Put /study/{} with body {}", id, dto.toString());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
