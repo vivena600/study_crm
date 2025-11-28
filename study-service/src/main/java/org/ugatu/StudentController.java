@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/study")
+@RequestMapping("/students")
 @RequiredArgsConstructor
 @Slf4j
 @Validated
@@ -37,16 +37,16 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<ShortStudentDto>> getAllStudy() {
         log.info("GET /study");
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
     }
 
     /**
      * Получение информации пользователя по его id
      **/
     @GetMapping("/{id}")
-    public ResponseEntity<List<FullStudentDto>> getStudyById(@PathVariable UUID id) {
+    public ResponseEntity<FullStudentDto> getStudyById(@PathVariable UUID id) {
         log.info("GET /study/{}", id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getStudentById(id), HttpStatus.OK);
     }
 
     /**
@@ -56,6 +56,6 @@ public class StudentController {
     public ResponseEntity<FullStudentDto> updateStudent(@PathVariable UUID id,
                                                         @RequestBody @Validated CreateStudentDto dto) {
         log.info("Put /study/{} with body {}", id, dto.toString());
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(studentService.updateStudyDto(id, dto), HttpStatus.OK);
     }
 }

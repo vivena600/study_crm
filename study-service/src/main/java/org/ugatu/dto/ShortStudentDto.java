@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ShortStudentDto {
-    private UUID StudyId;
+    private UUID id;
     private String firstName;
     private String lastName;
     private String middleName;

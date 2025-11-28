@@ -16,8 +16,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity(name = "users")
-@Table(name = "users")
+@Entity
+@Table(name = "students")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,8 +26,9 @@ import java.util.UUID;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID StudyId;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;

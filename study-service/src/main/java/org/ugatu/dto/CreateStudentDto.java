@@ -1,5 +1,6 @@
 package org.ugatu.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDateTime;
 
@@ -28,15 +30,17 @@ public class CreateStudentDto {
     @Length(max = 100)
     private String middleName;
 
-    @Past(message = "Enter valid date of your birth")
+    @Past(message = "Дата рождения должна быть в прошлом")
     private LocalDateTime dateOfBirth;
 
     @Length(max = 20)
     private String phoneNumber;
 
-    @NotBlank
+
     @Length(max = 200)
+    @Email(message = "Введите корректную почту")
     private String email;
 
+    @URL
     private String photoUrl;
 }

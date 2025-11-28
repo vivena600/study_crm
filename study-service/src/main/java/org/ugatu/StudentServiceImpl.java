@@ -8,7 +8,9 @@ import org.ugatu.dto.CreateStudentDto;
 import org.ugatu.dto.FullStudentDto;
 import org.ugatu.dto.ShortStudentDto;
 import org.ugatu.exception.NotFoundException;
+import org.ugatu.exception.ValidationRequestException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +27,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public FullStudentDto createdStudent(CreateStudentDto dto) {
         log.info("Created student:{}", dto.toString());
+
+        if (studentRepository.existsStudentByEmail(dto.getEmail())) {
+            throw new ValidationRequestException("Пользователь с такой почтой уже существует");
+        }
         Student entity = studentMapper.toCreatedEntity(dto);
+        entity.setCreatedAt(LocalDateTime.now());
         return studentMapper.toFullStudentDto(studentRepository.save(entity));
     }
 

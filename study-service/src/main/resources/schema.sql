@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS student
+CREATE TABLE IF NOT EXISTS students
 (
     id            UUID PRIMARY KEY,
     first_name    VARCHAR(100) NOT NULL,
