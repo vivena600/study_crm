@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateStudentDto {
+public class CreateTeacherDto {
     @NotBlank
     @Length(max = 100)
     private String firstName;
@@ -42,4 +42,9 @@ public class CreateStudentDto {
 
     @URL
     private String photoUrl;
+
+    @Length(max = 512)
+    private String description;
+
+    private Integer experience;
 }

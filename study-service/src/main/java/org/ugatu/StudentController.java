@@ -50,7 +50,7 @@ public class StudentController {
     }
 
     /**
-     * Получение информации пользователя по его id
+     * Обновление информации о пользователе
      **/
     @PutMapping("/{id}")
     public ResponseEntity<FullStudentDto> updateStudent(@PathVariable UUID id,
