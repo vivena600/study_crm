@@ -23,9 +23,8 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher teacherId;
+    @Column(name = "teacher_id")
+    private UUID teacherId;
 
     @Column(name = "title", nullable = false, length = 100)
     private String title;

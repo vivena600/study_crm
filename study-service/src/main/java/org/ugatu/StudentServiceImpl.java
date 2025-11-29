@@ -27,10 +27,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public FullStudentDto createdStudent(CreateStudentDto dto) {
         log.info("Created student:{}", dto.toString());
-
-        if (studentRepository.existsStudentByEmail(dto.getEmail())) {
-            throw new ValidationRequestException("Пользователь с такой почтой уже существует");
-        }
+        checkEmail(dto);
         Student entity = studentMapper.toCreatedEntity(dto);
         entity.setCreatedAt(LocalDateTime.now());
         return studentMapper.toFullStudentDto(studentRepository.save(entity));
@@ -57,6 +54,7 @@ public class StudentServiceImpl implements StudentService {
     public FullStudentDto updateStudyDto(UUID id, CreateStudentDto dto) {
         log.info("Update student by id {}", id);
         Student student = findStudentById(id);
+        checkEmail(dto);
 
         Optional.ofNullable(dto.getDateOfBirth()).ifPresent(student::setDateOfBirth);
         Optional.ofNullable(dto.getEmail()).ifPresent(student::setEmail);
@@ -72,5 +70,11 @@ public class StudentServiceImpl implements StudentService {
     private Student findStudentById(UUID id) {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Student with id " + id + " does not exist"));
+    }
+
+    private void checkEmail(CreateStudentDto dto) {
+        if (studentRepository.existsStudentByEmail(dto.getEmail())) {
+            throw new ValidationRequestException("Пользователь с такой почтой уже существует");
+        }
     }
 }

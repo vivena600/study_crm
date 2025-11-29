@@ -19,6 +19,7 @@ import java.util.UUID;
 @Slf4j
 @Validated
 public class TeacherController {
+    private final TeacherService teacherService;
 
     /**
      * Создание страницы преподавателя
@@ -26,7 +27,7 @@ public class TeacherController {
     @PostMapping
     public ResponseEntity<FullTeacherDto> create(@Validated @RequestBody CreateTeacherDto dto) {
         log.info("POST /teachers with body {}", dto.toString());
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(teacherService.createdTeacher(dto), HttpStatus.CREATED);
     }
 
     /**
@@ -35,7 +36,7 @@ public class TeacherController {
     @GetMapping
     public ResponseEntity<List<ShortTeacherDto>> findAll() {
         log.info("GET /teachers");
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.getAllTeachers(), HttpStatus.OK);
     }
 
     /**
@@ -44,13 +45,13 @@ public class TeacherController {
     @GetMapping("/{id}")
     public ResponseEntity<FullTeacherDto> findById(@PathVariable("id") UUID id) {
         log.info("GET /teachers/{}", id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.getTeacherById(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<FullTeacherDto> updateTeacher(@PathVariable("id") UUID id,
                                                         @RequestBody CreateTeacherDto dto) {
         log.info("PUT /teachers/{}", id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.updateTeacher(id, dto), HttpStatus.OK);
     }
 }
