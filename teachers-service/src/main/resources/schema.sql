@@ -6,10 +6,10 @@ CREATE TABLE IF NOT EXISTS teachers
     middle_name   VARCHAR(100), -- Отчество, может быть NULL
     date_of_birth DATE,
     phone_number  VARCHAR(20),
-    email         VARCHAR(255),
+    email         VARCHAR(255) UNIQUE NOT NULL,
     photo_url     VARCHAR(512), -- Ссылка на фото
-    description   VARCHAR(512) --Описание страницы преподавателя
-    job_experience INTEGER
+    description   VARCHAR(512), --Описание страницы преподавателя
+    job_experience INTEGER,
     created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 
