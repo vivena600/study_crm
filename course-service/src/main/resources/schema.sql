@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS lessons
     text_lesson TEXT,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
-    lesson_type VARCHAR(50),
+    lesson_type VARCHAR(50) NOT NULL DEFAULT 'THEORY',
     teacher_id UUID,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
