@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 import org.ugatu.client.TeacherClient;
-import org.ugatu.dto.AssignTeacherDto;
 import org.ugatu.dto.ShortCourseDto;
 import org.ugatu.exception.NotFoundException;
 import org.ugatu.mapper.CourseMapper;
@@ -51,7 +50,6 @@ public class TeacherServiceImpl implements TeacherService {
     @Transactional(readOnly = true)
     public List<ShortCourseDto> getCoursesByTeacher(UUID teacherId) {
         checkTeachers(teacherId);
-        checkCourses(teacherId);
 
         List<UUID> courseIds = courseTeacherRepository.findByTeacherId(teacherId)
                 .stream()
