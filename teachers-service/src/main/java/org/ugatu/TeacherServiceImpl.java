@@ -51,7 +51,6 @@ public class TeacherServiceImpl implements TeacherService {
     public FullTeacherDto getTeacherById(UUID id) {
         log.info("Get teacher by id {}", id);
         Teacher teacher = findTeacherById(id);
-        teacher.setCreatedAt(LocalDateTime.now());
         return teacherMapper.toFullTeacherDto(teacher, findSkillsByTeacher(id));
     }
 
@@ -71,7 +70,7 @@ public class TeacherServiceImpl implements TeacherService {
         Optional.ofNullable(dto.getDescription()).ifPresent(teacher::setDescription);
         Optional.ofNullable(dto.getExperience()).ifPresent(teacher::setExperience);
 
-        return teacherMapper.toFullTeacherDto(teacher, findSkillsByTeacher(id));
+        return teacherMapper.toFullTeacherDto(teacherRepository.save(teacher), findSkillsByTeacher(id));
     }
 
     private Teacher findTeacherById(UUID id) {

@@ -1,7 +1,5 @@
 package org.ugatu;
 
-import lombok.experimental.UtilityClass;
-import org.hibernate.annotations.Comment;
 import org.springframework.stereotype.Component;
 import org.ugatu.dto.CreateTeacherDto;
 import org.ugatu.dto.FullTeacherDto;

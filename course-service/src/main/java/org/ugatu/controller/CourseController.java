@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ugatu.dto.CreateCourseDto;
 import org.ugatu.dto.FullCourseDto;
+import org.ugatu.dto.ShortCourseDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +39,7 @@ public class CourseController {
      * Просмотр всех курсов
      */
     @GetMapping
-    public ResponseEntity<List<FullCourseDto>> getCourses() {
+    public ResponseEntity<List<ShortCourseDto>> getCourses() {
         log.info("GET /course");
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
