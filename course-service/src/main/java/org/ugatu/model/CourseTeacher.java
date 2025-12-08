@@ -22,6 +22,6 @@ public class CourseTeacher {
     @Column(name = "course_id", nullable = false)
     private UUID courseId;
 
-    @Column(name = "student_id", nullable = false)
-    private UUID studentId;
+    @Column(name = "teacher_id", nullable = false)
+    private UUID teacherId;
 }

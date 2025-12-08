@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.ugatu.dto.CreateCourseDto;
 import org.ugatu.dto.FullCourseDto;
+import org.ugatu.dto.ShortCourseDto;
 import org.ugatu.exception.NotFoundException;
 import org.ugatu.mapper.CourseMapper;
 import org.ugatu.model.Course;
@@ -36,10 +37,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FullCourseDto> getCourses() {
+    public List<ShortCourseDto> getCourses() {
         log.info("Get courses");
         return courseRepository.findAll().stream()
-                .map(courseMapper::toDto)
+                .map(courseMapper::toShortDto)
                 .collect(Collectors.toList());
     }
 

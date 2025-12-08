@@ -1,5 +1,6 @@
 package org.ugatu.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.ugatu.dto.CreateCourseDto;
 import org.ugatu.dto.FullCourseDto;
 import org.ugatu.dto.ShortCourseDto;
+import org.ugatu.service.CourseService;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,12 +27,13 @@ import java.util.UUID;
 @Slf4j
 @Validated
 public class CourseController {
+    private final CourseService courseService;
 
     /**
      * Создание курса
      */
     @PostMapping
-    public ResponseEntity<FullCourseDto> createCourse(@Validated @RequestBody FullCourseDto dto) {
+    public ResponseEntity<FullCourseDto> createCourse(@RequestBody @Valid FullCourseDto dto) {
         log.info("POST /course with body: {}", dto);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
@@ -57,7 +60,8 @@ public class CourseController {
      * Обновление информации о курсе
      */
     @PatchMapping("/{courseId}")
-    public ResponseEntity<FullCourseDto> updateCourse(@PathVariable UUID courseId, @RequestBody CreateCourseDto dto) {
+    public ResponseEntity<FullCourseDto> updateCourse(@PathVariable UUID courseId,
+                                                      @RequestBody @Valid CreateCourseDto dto) {
         log.info("PATCH /course/{}",courseId);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
