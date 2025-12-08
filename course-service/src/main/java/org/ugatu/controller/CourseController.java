@@ -33,9 +33,9 @@ public class CourseController {
      * Создание курса
      */
     @PostMapping
-    public ResponseEntity<FullCourseDto> createCourse(@RequestBody @Valid FullCourseDto dto) {
+    public ResponseEntity<FullCourseDto> createCourse(@RequestBody @Valid CreateCourseDto dto) {
         log.info("POST /course with body: {}", dto);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(courseService.createCourse(dto), HttpStatus.CREATED);
     }
 
     /**
@@ -44,7 +44,7 @@ public class CourseController {
     @GetMapping
     public ResponseEntity<List<ShortCourseDto>> getCourses() {
         log.info("GET /course");
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(courseService.getCourses(), HttpStatus.OK);
     }
 
     /**
@@ -53,7 +53,7 @@ public class CourseController {
     @GetMapping("/{courseId}")
     public ResponseEntity<FullCourseDto> getCourseById(@PathVariable UUID courseId) {
         log.info("GET /course/{}",courseId);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(courseService.getCourseById(courseId), HttpStatus.OK);
     }
 
     /**
@@ -61,8 +61,8 @@ public class CourseController {
      */
     @PatchMapping("/{courseId}")
     public ResponseEntity<FullCourseDto> updateCourse(@PathVariable UUID courseId,
-                                                      @RequestBody @Valid CreateCourseDto dto) {
+                                                      @RequestBody CreateCourseDto dto) {
         log.info("PATCH /course/{}",courseId);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(courseService.updateCourse(courseId, dto), HttpStatus.OK);
     }
 }

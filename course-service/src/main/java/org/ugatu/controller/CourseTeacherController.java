@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/course/{courseId}/teacher/{teacherId}")
+@RequestMapping("/course/teacher/{teacherId}")
 @RequiredArgsConstructor
 @Slf4j
 public class CourseTeacherController {
@@ -25,7 +25,7 @@ public class CourseTeacherController {
     /**
      * Назначение приподавателя на курс
      */
-    @PostMapping
+    @PostMapping("/{courseId}")
     public ResponseEntity<Void> assignTeacher(
             @PathVariable UUID courseId,
             @PathVariable UUID teacherId) {

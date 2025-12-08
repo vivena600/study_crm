@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/course/{courseId}/student/{studentId}")
+@RequestMapping("/course/student/{studentId}")
 @RequiredArgsConstructor
 @Slf4j
 public class CourseStudentController {
@@ -22,10 +22,10 @@ public class CourseStudentController {
     /**
      * Назначение студента на курс
      */
-    @PostMapping
+    @PostMapping("/{courseId}")
     public ResponseEntity<Void> assignStudent(
-            @PathVariable UUID courseId,
-            @PathVariable UUID studentId) {
+            @PathVariable(name = "courseId") UUID courseId,
+            @PathVariable(name = "studentId") UUID studentId) {
         log.info("Assign student {} to course {}", studentId, courseId);
         studentService.assignStudent(courseId, studentId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
