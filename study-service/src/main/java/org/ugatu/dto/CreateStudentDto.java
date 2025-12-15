@@ -36,7 +36,6 @@ public class CreateStudentDto {
     @Length(max = 20)
     private String phoneNumber;
 
-
     @Length(max = 200)
     @Email(message = "Введите корректную почту")
     private String email;
