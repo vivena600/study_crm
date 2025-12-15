@@ -32,7 +32,7 @@ public class CourseController {
     /**
      * Создание курса
      */
-    @PostMapping
+    @PostMapping("/admin")
     public ResponseEntity<FullCourseDto> createCourse(@RequestBody @Valid CreateCourseDto dto) {
         log.info("POST /course with body: {}", dto);
         return new ResponseEntity<>(courseService.createCourse(dto), HttpStatus.CREATED);
@@ -59,7 +59,7 @@ public class CourseController {
     /**
      * Обновление информации о курсе
      */
-    @PatchMapping("/{courseId}")
+    @PatchMapping("/admin/{courseId}")
     public ResponseEntity<FullCourseDto> updateCourse(@PathVariable UUID courseId,
                                                       @RequestBody CreateCourseDto dto) {
         log.info("PATCH /course/{}",courseId);

@@ -22,7 +22,7 @@ public class CourseStudentController {
     /**
      * Назначение студента на курс
      */
-    @PostMapping("/{courseId}")
+    @PostMapping("/admin/{courseId}")
     public ResponseEntity<Void> assignStudent(
             @PathVariable(name = "courseId") UUID courseId,
             @PathVariable(name = "studentId") UUID studentId) {

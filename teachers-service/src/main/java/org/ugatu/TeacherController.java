@@ -24,7 +24,7 @@ public class TeacherController {
     /**
      * Создание страницы преподавателя
      **/
-    @PostMapping
+    @PostMapping("/admin")
     public ResponseEntity<FullTeacherDto> create(@Validated @RequestBody CreateTeacherDto dto) {
         log.info("POST /teachers with body {}", dto.toString());
         return new ResponseEntity<>(teacherService.createdTeacher(dto), HttpStatus.CREATED);

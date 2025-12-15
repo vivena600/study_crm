@@ -23,9 +23,9 @@ public class CourseTeacherController {
     private final TeacherService teacherService;
 
     /**
-     * Назначение приподавателя на курс
+     * Назначение прeподавателя на курс
      */
-    @PostMapping("/{courseId}")
+    @PostMapping("/admin/{courseId}")
     public ResponseEntity<Void> assignTeacher(
             @PathVariable UUID courseId,
             @PathVariable UUID teacherId) {

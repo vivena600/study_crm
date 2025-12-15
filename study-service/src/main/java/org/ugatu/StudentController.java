@@ -24,9 +24,9 @@ public class StudentController {
     /**
      * Создание студента
      **/
-    @PostMapping
+    @PostMapping("/admin")
     public ResponseEntity<FullStudentDto> createdStudy(@RequestBody @Validated CreateStudentDto dto) {
-        log.info("POST /study with body {}", dto.toString());
+        log.info("POST /students/admin with body {}", dto.toString());
         FullStudentDto result = studentService.createdStudent(dto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
@@ -34,9 +34,9 @@ public class StudentController {
     /**
      * Получение всех пользователей
      **/
-    @GetMapping
+    @GetMapping("/admin")
     public ResponseEntity<List<ShortStudentDto>> getAllStudy() {
-        log.info("GET /study");
+        log.info("GET /students/admin");
         return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
     }
 
@@ -46,6 +46,20 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<FullStudentDto> getStudyById(@PathVariable UUID id) {
         log.info("GET /study/{}", id);
+
+        //TODO - Добавить проверку роли пользователя
+        // Студент может смотреть ТОЛЬКО свой профиль
+        /*
+        if ("STUDENT".equals(userRole) && !currentUserId.equals(id)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        // Менеджер — может смотреть любой
+        if ("MANAGER".equals(userRole)) {
+            return ResponseEntity.ok(studentService.getStudentById(id));
+        }
+         */
+
         return new ResponseEntity<>(studentService.getStudentById(id), HttpStatus.OK);
     }
 
